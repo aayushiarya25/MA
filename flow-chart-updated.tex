@@ -1,0 +1,290 @@
+\documentclass[a4paper,10 pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{multicol}
+
+%\documentclass{article}
+
+%\usepackage[latin1]{inputenc}
+%\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{mdwtab}
+% \usepackage[pdftex]{graphicx}
+%\usetikzlibrary{matrix,shapes,arrows,positioning,chains}
+\usetikzlibrary{shapes,arrows}
+\title{FLOW CHART FOR THE RELATED PARAMETERS OF MICROWAVE ABSORBERS}
+\begin{document}
+
+\maketitle
+\pagestyle{empty}
+
+% Define block styles
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!10, 
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+    minimum height=1em,text width=5em]
+ \begin{center}
+\makebox[0.4\textwidth][c]{\begin{tikzpicture}[scale=2,node distance = 1.5 cm, nodes = {align = center}, >=latex,anchor=center, text width=2em]
+%\makebox[\textwidth][c]{\begin{tikzpicture}[scale=2, auto, every node/.style={font=\footnotesize, >=stealth,node distance=1cm,anchor=base,text width=5em}]
+%node distance = 2 cm , anchor=center]
+%\begin{tikzpicture}
+    % Place nodes
+\node [block, align= center] (init) {Microwave Asorber};
+\node [block, below of=init] (Fr) {Resonance frequency fr};
+\node [cloud, left of=Fr, node distance=5.5 cm] (Rl) {Reflection Loss RL};
+\node [cloud, right of=Fr, node distance=5 cm] (delta) {Bandwidth Delta fr};
+  \node [block, below of=Rl, node distance=3cm] (in) {Input impedance $Z_{in}$}; 
+ \node [block, below of=in,text width = 2cm,node distance=2cm] (Zo) {\small{characteristic Impedance$ R.L = 20 \log(\frac{Z_o}{4Z_{in}})$}};
+ \node [block, left of=Zo, node distance=3 cm] (ratio) {Ratio of permeabilit isto permittivity $Z_in = \sqrt{\frac{\mu_r}{\epsilon_r}}$};
+    \node [block, below of=Zo,text width = 3cm, node distance = 3cm] (Pm) { \small{ Min refarctive index $n_1 = \sqrt{\mu_r \epsilon_r}$ $ Z_(in) = Z_o \sqrt{\frac{\mu }{\epsilon}} \tanh(\frac{-j2 \pi f d \sqrt{ \mu \epsilon}}{c})$}};
+
+    \node [block, left of=Fr, node distance=3cm] (wd) {width 'd'};
+   \node [block, below of=Fr, node distance=2cm] (k) {wave propagation constant$$k = {\omega_o}^2*m$$};
+
+    \node [block, below of=delta] (Q) {Qulaity factor};
+
+    \node [block, below of=Q] (Damp) {Damping constant};
+
+    \node [block, left of=Damp, node distance = 3 cm] (Wn) {Natural resonant frequency};
+
+    \node [block, right of=Damp,node distance=2.5 cm] (Time) {Time constant};
+% \node [block, below of=Wn, node distance = 3 cm] (k) {Propagation constant 'k'};
+ \node [block, below of=k , node distance = 2 cm] (intr){\small{ $\eta$ Intrinsic Impedance$$\eta = 2 \sqrt{km}$$}};
+ 	\node[block,below of =intr,node distance=2cm,text width=4cm](ap) {\small{${\alpha}_p$ POLARIZABILITY\small{$${\alpha}_p = \dfrac{e^2 m ({\omega_o}^2 - {\omega}^2)}{m^2({\omega_o}^2 - {\omega}^2)^2 + 4 \eta \omega^2} $$}}};
+ 	\path [line] (intr) -- (ap);
+ 		\node[block,below of =ap,node distance=3cm,text width=2cm](nd) {$N$ Number of Dipoles$$\dfrac{({\mu \epsilon})- 1}{({\mu \epsilon}) + 2 } = \dfrac{N \alpha_p}{3 \epsilon_o}$$};
+ 		\path [line] (ap) -- (nd);
+ 			\node[block,below of =nd,node distance=2cm,text width=2cm](wp)  {${\omega}_p$ Dipolar Frequency};
+ 			\path [line] (nd) -- (wp);
+ %\node [block, left of=intr, node distance = 3 cm] (pol) {polarizability};
+ %\node [block, below of=pol, node distance = 3 cm] (N) {Number of dipoles};
+ %\node [block, below of=N, node distance = 3 cm] (Wp) {Dipole frequency $w_p$};
+% 	\node[block,below of =wp,node distance=3cm,text width=3cm](re) { real part of permittivity\small{ 
+% 		$\epsilon^{'}_{r } = \chi^{'}_{e} + 1 = \epsilon^{''}_{r } 
+% \epsilon^{'}_r = (\dfrac{\omega^2_P (\omega^2_o - \omega^2)}{(\omega^2_o - \omega^2)^2 + \frac{\omega^2}{\tau^2}}) + 1 $}};
+ %	\node[block,below of =re,node distance=3cm,text width=3cm](uv) { Upper value of Permeability and Permittivity $$ \epsilon^{''}_r  = \dfrac{n a_p c}{2 \pi \nu}$$} ;
+ %	\path [line] (re) -- (uv);
+%  	\node[block,below of =uv,node distance=3cm,text width=3cm](disp) { Maximum Limit of permeability and permittivity Taking into account CAUCHY'S DISPERSION EQUATION \small{$n = n_o + \dfrac{C}{\lambda_o^{2}}$} } ;	
+ % 	\path [line] (uv) -- (disp);
+ \node [block, below of=Time, node distance = 7 cm, text width=3cm] (Im) { \small{ Imaginary permittivity $\epsilon^{''}$ 
+ 		 		$\epsilon^{'}_{r } = \chi^{'}_{e} + 1 = \epsilon^{''}_{r } 
+ 		\epsilon^{'}_r = (\dfrac{\omega^2_P (\omega^2_o - \omega^2)}{(\omega^2_o - \omega^2)^2 + \frac{\omega^2}{\tau^2}}) + 1 $}};
+ \node [block, right of=Im, node distance = 2.5 cm, text width= 1cm] (con) {Conductivity $\sigma$};
+ \node [block, below of=Im, node distance = 4 cm,scale=0.9,text width=3cm] (n2) { Upper value of refractive index $n_2$ $$ \epsilon^{''}_r  = \dfrac{n a_p c}{2 \pi \nu}$$ };
+  	\node[block,left of =n2,node distance=4cm,text width=3cm](disp) {\small{ Max. refractive index using CAUCHY'S DISPERSION EQUATION \small{$n = n_o + \dfrac{C}{\lambda_o^{2}}$}} } ;	
+ \node [block, left of=disp, node distance = 5 cm] (M) {Metallization  Criteria   $M=\frac{R_m}{V_m} = (\dfrac{n^2_o -1}{n^2_o +2 })$ };
+ \node [block, below of=M, node distance = 3 cm,text width = 3 cm] (Eg) {\small {Polarisation Energy $\equiv$ Global Hardness factor$\eta_g$ $E_g = 20(1- \dfrac{R_m}{V_m})^2$}};
+ \node [block, right of=Eg, node distance = 3 cm] (Glob) {Global Hardness factor$\eta_g$};
+ \node [block, right of=Glob, node distance = 3 cm] (R) {Atomic Radii in  $\AA$ $$\eta = \dfrac{e^2}{2 R} $$};
+    %\node [block, below of=decide, node distance=3cm] (stop) {stop};
+    % Draw edges
+ \path [line] (init) -| (Rl);
+ \path [line] (init) -- (Fr);
+  \path [line] (init) -| (delta);
+   % \path [line] (decide) -| node [near start] {yes} (update);
+    \path [line] (Rl) -- (in);
+     \path [line] (in) -| (ratio);
+    %\path [line] (decide) -- node {no}(stop);
+ \path [line] (in) -- (Zo);
+\path [line] (ratio) |- (Pm);
+\path [line] (Fr) -- (k);
+\path [line] (k) -- (intr);
+\path [line,dashed] (Zo) -- (Pm);
+% \path [line,dashed] (in) |- node{resonnace} (Pm);
+\path [line] (Fr) -- (wd);
+\path [line] (wd) |- (Pm);
+\path [line] (delta) -- (Q);
+ \path [line] (Q) -| (Wn);
+\path [line] (Damp) -- (Time);
+\path [line] (Q) -- (Damp);
+\path [line] (Wn) -- (k);
+\path [line] (k) -- (intr);
+\path [line] (n2) -- (disp);
+%\path [line] (intr) -- (pol);
+%\path [line] (pol) -- (N);
+%\path [line] (N) -- (Wp);
+%\path [line] (Wp) |- (Im);
+\path [line] (Time) -- (Im);
+\path [line] (Im) -- (con);
+\path [line] (Im) -- (n2);
+\path [line] (disp) -- (M);
+\path [line] (M) -- (Eg);
+\path [line] (Eg) -- (Glob);
+\path [line] (Glob) -- (R);
+\path [line] (Pm) |- (M);
+%\path [line] (Pm) |- (N);
+
+\end{tikzpicture}
+
+}
+\end{center}
+
+\resizebox{0.8\textwidth}{!}{
+\begin{tabular}{|c|c|}
+\hline 
+Symbol &Description \\ 
+ \hline
+MA & Microwave Absorber\\
+\hline
+$R_l$ &  Reflection Loss $= -20 dB$\\
+\hline
+$Z_{in}$ &Input impedance of MA \\
+\hline
+$Z_o$ & Characteristic Impedance \\
+\hline
+$\epsilon$ & Permeability \\
+\hline
+$\mu$ & Permittivity \\
+\hline
+$d$ & Width of microwave absorber\\
+\hline
+$f_r$ / $\omega_r$ & Resonance Frequency\\
+\hline
+Q & Quality factor \\
+\hline
+$\zeta$ & Damping ratio\\
+\hline
+$\delta {\omega}_r$ & Bandwidth \\
+\hline
+$\alpha$ & attenuation constant \\
+\hline
+$\omega_n$ & Natural Resonance Frequency of MA\\
+\hline
+$c$ & speed of light \\
+\hline
+$\epsilon_o$ & Free space Permittivity \\
+\hline
+$ \epsilon_r$ & real permittivity \\
+\hline
+$\epsilon$ & Complex Permittivity \\
+\hline
+$\epsilon^{'}$  &Real Part of Permittivity \\
+\hline
+$\epsilon^{''}$ &Imaginary Part of Permittivity\\
+\hline
+$\sigma$ & conductivity\\
+\hline
+$\alpha_p$ & Polarizability\\
+\hline
+$\eta$ & Intrinsic Damping Coefficient\\
+\hline
+$e$ & electronic charge\\
+\hline
+$k$ & Propagation constant \\
+\hline
+$m$ & mass of electron \\
+\hline
+N & Number of Dipoles per unit volume \\
+\hline
+$\tau $& Time constant\\
+\hline
+$\omega_p$ & Dipolar Resonance Frequency\\
+\hline
+n & Linear refractive index\\
+\hline
+$a_p$ & Power absorption coefficient \\
+\hline
+$R_m$ & Molar fraction \\
+\hline
+$V_m$ & Molar Volume \\
+\hline
+M & Metallization criteria \\
+\hline
+$E_g$ & Polarisation Energy\\
+\hline
+$\eta_g$ & Global Hardness Factor\\
+\hline
+R & Atomic Radii\\
+\hline
+
+\end{tabular}
+}
+
+ %\begin{center}
+%	\makebox[0.4\textwidth][c]{\begin{tikzpicture}[scale=2,node distance = 1.5 cm, nodes = {align = center}, >=latex,anchor=center, text width=2em]
+%\node [block, align= center] (ep) {Effective Spatial Energy Parameter};
+
+%\end{tikzpicture}
+
+%}
+
+%\end{center}
+%\begin{multicols}{2}
+ %\begin{center}
+ %\frame{
+%	\begin{minipage}{0.5\textwidth}
+%\twocolumn[
+\resizebox{15cm}{!}{
+		\begin{tikzpicture}[
+	scale=4,	node distance = 1.5 cm, 
+		nodes = {align = center}, >=latex,anchor=center,
+	 text width=6em]
+%	\makebox{0.6\textwidth}[c]{
+		%	\begin{tikzpicture}[scale=2,node distance = 1.5 cm, 
+%	nodes = {align = right}, >=latex, text width=2em]
+		%\makebox[\textwidth][c]{\begin{tikzpicture}[scale=2, auto, every node/.style={font=\footnotesize, >=stealth,node distance=1cm,anchor=base,text width=5em}]
+		%node distance = 2 cm , anchor=center]
+		%\begin{tikzpicture}
+		% Place nodes
+		\node[align=left](o1) {};
+		\node [block, left of =o1,node distance=11 cm] (ep) {Effective Spatial Energy Parameter $P_E = \frac{P_o}{r_i}$};
+	%	\node [block, below of = ep] (o) {};
+		\node [block, below of=ep,node distance = 3cm,text width = 2cm] (po) { Spatial Energy Parameter $P_o$ $ \dfrac{1}{{q^2}} + \dfrac{1}{\eta} = \dfrac{1}{P_o}$};
+			\node [below of = po, node distance= 3cm](o) {};
+			\node [block, right of=o,node distance = 3cm,text width = 2cm] (glob) { Global Hardness Factor };
+		
+		\node [block, left of=o,node distance = 3cm,text width = 2cm] (q) { $q = \frac{z^*}{n^*}$};
+		 	\node [block, below of=q,node distance = 3cm,text width = 2cm] (n) { $n^*$ outermost filled orbital with suitable corrections accounting screening effects};	
+			\node [block, left of=n,node distance = 3cm,text width = 2cm] (z) { $z^*$ depends on the orbital exponent};	
+		
+		
+			\path [line] (ep) -- (po);
+				\path [line] (po) -| (q);
+					\path [line] (po) -| (glob);
+						\path [line] (q) -| (z);
+				\path [line] (q) -- (n);
+			
+	%	\end{tikzpicture}
+		
+%	}
+%\end{minipage}
+%}
+%\end{center}
+%}
+%\columnbreak
+%	\begin{minipage}{0.5\textwidth}
+%	\resizebox{0.8\textwidth}{!}{
+	%	\begin{tikzpicture}[scale=1.5,node distance = 1.5 cm, nodes = {align = center}, >=latex,anchor=center, text width=2em]
+	%		\node[right of = fshell, node distance=0.5cm](or){};
+			\node [block,below of=o1,node distance=1 cm ] (mm) {\small{MAGNETIC MICROWAVE ABSORBERS}};
+				\node[below of = mm, node distance=0.5cm, node distance=3cm](or1){};
+			
+			\node [block,right of=or1, node distance=2cm] (dshell) {\small{d-shell elements}};
+			\node [block,left of=or1, node distance = 3 cm] (fshell) {\small{f-shell elements}};
+			\node [block,below of=dshell, node distance = 3 cm] (ipd) {\small{ Imaginary Permittivity $\mu^{''} = \dfrac{c}{2 \pi d f_m}$ }};
+			\node [block,below of=ipd, node distance = 3 cm] (vsd) {\small{Volume susceptibility $\chi_v$}};
+			\node [block,below of=vsd, node distance = 3 cm] (asd) {\small{Atomic susceptibility $\chi_A = V_m x N x \chi_v$}};
+			\node [block,below of=asd, node distance = 3 cm] (sd) {\small{Spin dipole momemt  $$\mu^{s} = 2.828 (\sqrt{{\chi_A T}})$$}};
+			\node [block,below of=fshell, node distance = 3 cm] (rpf) {\small{real permittivity $\mu^{'}$}};
+			\node [block,below of=rpf, node distance = 3 cm] (sf) {\small{Susceptibility $\chi_m = \mu_r - 1$}};
+		\node [block,below of=sf, node distance = 4 cm] (odf) {\small{orbital dipole momemt  $$\mu_J = \dfrac{1}{\mu_B} \sqrt{\frac{\chi_m ( 3kT)}{n_l \mu_o}}$$}};
+		\path[line](mm) -| (dshell);
+		\path[line](mm) -| (fshell);
+		\path[line](dshell) -- (ipd);
+		\path[line](ipd) -- (vsd);
+		\path[line](vsd) -- (asd);
+		\path[line](asd) -- (sd);
+		\path[line](fshell) -- (rpf);
+		\path[line](rpf) -- (sf);
+		\path[line](sf) -- (odf);
+		
+			\end{tikzpicture}
+		
+	}
+%]
+%\end{minipage}
+%\end{multicols}	
+\end{document}
